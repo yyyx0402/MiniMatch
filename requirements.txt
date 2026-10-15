@@ -1,0 +1,17 @@
+# Tested Python 3.12 application/model dependencies.
+# Install the appropriate PyTorch wheel for your GPU separately if needed.
+numpy==2.5.3
+pandas==2.3.3
+pyarrow==24.0.0
+scikit-learn==1.9.1
+lightgbm==4.7.0
+joblib==1.6.0
+fastapi==0.143.0
+uvicorn==0.54.0
+httpx==0.28.1
+threadpoolctl==3.7.0
+transformers==4.57.6
+safetensors==0.8.0
+tokenizers==0.22.2
+torch==2.8.0
+pytest==9.1.1

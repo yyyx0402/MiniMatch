@@ -1,0 +1,22 @@
+{
+  "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+  "model_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+  "split_seed": 42,
+  "test_queries": 1000,
+  "training_seeds": [42, 43, 44],
+  "epochs": 2,
+  "batch_size": 32,
+  "gradient_accumulation": 2,
+  "learning_rate": 0.00002,
+  "weight_decay": 0.01,
+  "warmup_fraction": 0.1,
+  "temperature": 0.1,
+  "pairs_per_query": 6,
+  "max_length": 128,
+  "encode_batch_size": 128,
+  "rrf_k": 60,
+  "retrieval_depth": 200,
+  "hybrid_alphas": [0.0, 0.25, 0.5, 0.75, 1.0],
+  "selection_metric": "validation supplied-candidate NDCG@10",
+  "hybrid_selection_metric": "validation known-E Recall@100"
+}

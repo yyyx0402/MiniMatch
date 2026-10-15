@@ -1,0 +1,12 @@
+MiniMatch contains original application and model-training code.
+
+Amazon ESCI / Shopping Queries Dataset is downloaded separately from
+https://github.com/amazon-science/esci-data at the commit pinned in the data
+download script. The upstream LICENSE and NOTICE are preserved with local data.
+
+The pretrained all-MiniLM-L6-v2 encoder is downloaded separately from
+https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2 at the revision
+pinned in the model configuration. Its original model card is preserved locally.
+
+Datasets, pretrained and fine-tuned weights, generated indices, and dependency
+binaries are not included in this source repository and keep their own terms.

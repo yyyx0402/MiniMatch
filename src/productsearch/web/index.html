@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>MiniMatch · 基于 MiniLM 的商品检索</title>
+  <link rel="stylesheet" href="/static/style.css?build=product">
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <a class="brand" href="/" aria-label="MiniMatch 首页"><span class="brand-icon">M<span>↗</span></span><span>MiniMatch<small>MiniLM 商品检索</small></span></a>
+      <div class="side-label">我的工作空间</div>
+      <nav aria-label="主导航">
+        <button class="nav-item active" data-tab="search"><span>⌕</span>发现商品</button>
+        <button class="nav-item" data-tab="compare"><span>▤</span>商品对比 <b id="nav-count" class="count-badge">0</b></button>
+        <button class="nav-item" data-tab="about"><span>ⓘ</span>使用说明</button>
+      </nav>
+      <div class="side-note"><span class="dot"></span><span id="connection">正在连接本地搜索</span><p id="catalog-note">英文商品需求 · 本地运行</p></div>
+      <div class="sidebar-bottom">找到，再做选择。<br><span>搜索、查看、比较。</span></div>
+    </aside>
+    <main>
+      <header class="topbar"><span>工作空间 <i>/</i> <b id="page-name">发现商品</b></span><span class="pill">● 本地运行</span></header>
+      <section id="search-view">
+        <div class="eyebrow">FIND YOUR NEXT CHOICE</div><h1>找到更合适的商品<span>。</span></h1>
+        <p class="intro">用英文描述商品需求，查看产品信息，把感兴趣的商品放在一起比较。</p>
+        <form id="search-form" class="search-box"><label for="query" class="sr-only">英文商品需求</label><span class="search-icon">⌕</span><input id="query" name="q" maxlength="240" value="wireless mouse" placeholder="例如 comfortable running shoes" autocomplete="off" required><button class="primary" id="search-button">搜索商品 <span>↗</span></button></form>
+        <div class="suggestions"><span>试试</span><button data-query="wireless mouse">无线鼠标</button><button data-query="stainless steel water bottle">不锈钢水瓶</button><button data-query="comfortable running shoes">舒适跑步鞋</button><span class="language-hint">当前支持英文搜索</span></div>
+        <div id="recent-searches" class="recent-searches" hidden></div>
+        <div class="search-toolbar"><div class="model-tabs" role="group" aria-label="搜索方式"><button class="selected" data-model="hybrid" aria-pressed="true">智能搜索 <span>推荐</span></button><button data-model="minilm" aria-pressed="false">语义搜索</button><button data-model="keyword" aria-pressed="false">关键词搜索</button></div><span id="mode-note" class="mode-note">结合关键词与语义，更全面地寻找相关商品</span></div>
+        <div id="search-status" class="status" role="status" aria-live="polite">正在准备搜索…</div><div id="search-error" class="error" role="alert" hidden></div>
+        <div id="results" class="results" aria-busy="false"></div>
+        <div class="load-more-wrap"><button id="load-more" class="secondary" hidden>加载更多商品</button></div>
+        <p class="footnote">历史商品数据，仅供搜索与信息比较；价格、库存及购买链接未提供。</p>
+      </section>
+      <section id="compare-view" hidden>
+        <div class="eyebrow">SIDE BY SIDE</div><h1>把选择，放在一起<span>。</span></h1>
+        <p class="intro">最多比较三件商品。可保留不同搜索中找到的商品，品牌、颜色、产品要点与描述均来自原始数据。</p>
+        <div id="compare-empty" class="empty">还没有选中商品。<button class="text-button" data-tab="search">去搜索商品 →</button></div>
+        <div id="compare-content" hidden><div class="compare-actions"><span id="compare-help">建议选择两件或三件商品进行比较。</span><button id="clear-compare" class="text-button">清空对比</button></div><div id="compare-table" class="table-scroll"></div></div>
+      </section>
+      <section id="about-view" hidden>
+        <div class="eyebrow">A LITTLE HELP</div><h1>更快找到，认真比较<span>。</span></h1><p class="intro">MiniMatch 使用微调后的 MiniLM，提供本地商品搜索与比较。</p>
+        <div class="help-grid">
+          <article class="panel"><h2>描述你的需求</h2><p>输入英文商品名称、材质、用途或型号，例如 <button class="inline-query" data-query="stainless steel water bottle">stainless steel water bottle</button>。结果不理想时，可减少限定词或更换表达。</p><h2>选择搜索方式</h2><p><b>智能搜索</b>结合关键词与语义；<b>语义搜索</b>适合描述需求和用途；<b>关键词搜索</b>适合明确的名称、品牌与型号。</p></article>
+          <article class="panel"><h2>查看与比较</h2><p>点击“查看详情”阅读完整信息。将最多三件商品加入对比，再进入“商品对比”查看字段差异。最近搜索与对比选择保存在当前浏览器。</p><h2>当前搜索模型</h2><p>语义搜索使用<b>微调后的 MiniLM</b>，帮助匹配不同表达的商品需求。匹配结果可能有误，请结合商品描述核对型号、规格与适用范围。</p></article>
+        </div>
+        <div class="protocol"><b>数据与使用范围</b><span id="data-note">当前为 Amazon ESCI 英语商品库。商品信息来自历史公开数据，部分描述可能不完整，不含实时价格、库存、商品图片和购买入口。搜索不会调用外部大模型 API。</span></div>
+      </section>
+      <footer><span>MiniMatch · 基于 MiniLM 的商品检索</span><span>本地模型 · 真实商品信息</span></footer>
+    </main>
+  </div>
+  <div id="compare-tray" class="compare-tray" hidden><span>已选 <b id="compare-count">0</b> / 3 件商品</span><div><button id="tray-clear" class="text-button">清空</button><button id="open-compare" class="primary">查看对比 →</button></div></div>
+  <dialog id="detail-dialog"><div class="dialog-heading"><div><div class="eyebrow">PRODUCT DETAILS</div><h2>商品详情</h2></div><button id="close-detail" class="close-button" aria-label="关闭商品详情">×</button></div><div id="detail-content"></div></dialog>
+  <script src="/static/app.js?build=product" defer></script>
+</body>
+</html>
